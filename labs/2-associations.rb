@@ -4,6 +4,40 @@
 # rails runner labs/2-associations.rb
 
 # 1. write code to display each contact (you can reuse the previous lab's code) and include the contact's company name, e.g.:
+apple = Company.where({name: "Apple"})[0]
+values = {  first_name: "David", 
+            last_name: "Elmets",
+            email: "david.elmets@kellogg.northwestern.edu",
+            phone_number: "205-410-1865",
+            company_id: apple.id }
+david=Contact.new(values)
+david.save
+puts "There are now #{Contact.all.count} contacts"
+
+new_contact = Contact.new
+
+new_contact.first_name = "Andy"
+new_contact.last_name = "Jassy"
+new_contact.email = "andy@gmail.com"
+new_contact.phone_number = "123-456-7890"
+
+new_contact.save
+
+puts "There are now #{Contact.all.count} contacts"
+all_contacts = Contact.all
+companies = Company.all
+for company in companies
+    puts company.name
+    for contact in company.contacts
+        puts "#{contact.first_name} #{contact.last_name} - #{contact.email}"
+end
+
+
+for person in  all_contacts
+    puts "#{person.first_name} #{person.last_name} #{person.company.name} #{person.email}"
+end
+
+
 
 # ---------------------------------
 # Contacts: 4
